@@ -120,7 +120,8 @@ def training(dataset, opt, pipe, iteration, saving_iterations, checkpoint_iterat
         print("number of nbrs", k)
         xyz = gaussians.get_xyz.detach()
         print("Feature Gaussian Model initialized.",xyz.shape)
-        nearest_k_map = pytorch3d.ops.knn_points(
+        #faster than knn
+        nearest_k_map = pytorch3d.ops.ball_query(
                         xyz.unsqueeze(0),
                         xyz.unsqueeze(0),
                         K=k
